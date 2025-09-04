@@ -1,9 +1,11 @@
 package com.periferia.apirest.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name = "alumnos")
 public class Alumno {
@@ -17,7 +19,15 @@ public class Alumno {
     private boolean estado;
     private int  edad;
 
-    public Alumno() {
+
+    public Alumno(String nombre, String apellido, boolean estado, int edad) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.estado = estado;
+        this.edad = edad;
     }
 
+    public Alumno() {
+
+    }
 }

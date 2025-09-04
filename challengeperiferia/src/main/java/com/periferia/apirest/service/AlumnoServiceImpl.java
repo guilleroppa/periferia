@@ -2,16 +2,18 @@ package com.periferia.apirest.service;
 
 import com.periferia.apirest.model.Alumno;
 import com.periferia.apirest.repository.AlumnosRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AlumnoServiceImpl implements AlumnoInterface{
+public class AlumnoServiceImpl implements AlumnoService {
 
-    @Autowired
-    AlumnosRepository alumnosRepository;
+    private final AlumnosRepository alumnosRepository;
+
+    public AlumnoServiceImpl(AlumnosRepository alumnosRepository) {
+        this.alumnosRepository = alumnosRepository;
+    }
 
     @Override
     public void grabarAlumno(Alumno alumno) {

@@ -1,7 +1,7 @@
 package com.periferia.apirest.controller;
 
 import com.periferia.apirest.model.Alumno;
-import com.periferia.apirest.service.AlumnoInterface;
+import com.periferia.apirest.service.AlumnoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 public class AlumnoController {
 
     @Autowired
-    AlumnoInterface alumnoInterface;
+    AlumnoService alumnoInterface;
 
     @PostMapping(value = "/grabarAlumnos")
     public ResponseEntity<Alumno> grabarAlumno(@RequestBody Alumno alumno) {
