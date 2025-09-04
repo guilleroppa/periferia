@@ -23,7 +23,7 @@ public class AlumnoController {
         try {
             alumnoInterface.grabarAlumno(alumno);
             log.info("Alumno creado exitosamente con el id {}", alumno.getId());
-            return ResponseEntity.ok().body(alumno);
+            return ResponseEntity.ok().body(new Alumno());
         } catch (Exception e) {
             log.error("Error al crear el alumno", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
