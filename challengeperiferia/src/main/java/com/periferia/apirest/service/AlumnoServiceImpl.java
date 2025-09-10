@@ -1,6 +1,7 @@
 package com.periferia.apirest.service;
 
 import com.periferia.apirest.model.Alumno;
+import com.periferia.apirest.model.AlumnoDTO;
 import com.periferia.apirest.repository.AlumnosRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;

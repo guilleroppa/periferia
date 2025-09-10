@@ -1,16 +1,19 @@
 package com.periferia.apirest;
 
+import com.periferia.apirest.controller.AlumnoController;
 import com.periferia.apirest.model.Alumno;
+import com.periferia.apirest.model.AlumnoDTO;
 import com.periferia.apirest.repository.AlumnosRepository;
+import com.periferia.apirest.service.AlumnoService;
 import com.periferia.apirest.service.AlumnoServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +22,15 @@ class AlumnoServiceTest {
     @Mock
     private AlumnosRepository alumnosRepository;
 
+    @Mock
+    private AlumnoService alumnoInterface;
+
     @InjectMocks
     private AlumnoServiceImpl alumnoService;
+
+    @InjectMocks
+    private AlumnoController alumnoController;
+
 
     @BeforeEach
     void setUp() {
@@ -95,6 +105,23 @@ class AlumnoServiceTest {
         assertEquals("Gómez", resultado.getApellido());
         assertEquals(18, resultado.getEdad());
         assertTrue(resultado.isEstado());
+    }
+
+    @Test
+    void buscarAlumno_deberiaRetornarNotFound_siNoExiste() {
+        Mockito.<Optional<Alumno>>when(Optional.ofNullable(alumnoService.buscarAlumno(999L)))
+                .thenReturn(Optional.empty());
+
+        ResponseEntity<AlumnoDTO> response = alumnoController.buscarAlumno(999);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void buscarAlumno_deberiaRetornarBadRequest_siIdInvalido() {
+        ResponseEntity<AlumnoDTO> response = alumnoController.buscarAlumno(-5);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
 }

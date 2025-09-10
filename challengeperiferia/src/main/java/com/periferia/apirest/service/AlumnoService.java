@@ -1,6 +1,8 @@
 package com.periferia.apirest.service;
 
 import com.periferia.apirest.model.Alumno;
+import com.periferia.apirest.model.AlumnoDTO;
+
 import java.util.List;
 
 public interface AlumnoService {
